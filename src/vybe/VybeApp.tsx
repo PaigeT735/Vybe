@@ -4,7 +4,9 @@ import { GlassBottomNav } from './components/GlassBottomNav';
 import { HomePage } from './pages/HomePage';
 import { ProfilePage } from './pages/ProfilePage';
 import { MemoriesPage } from './pages/MemoriesPage';
-import { PlaceholderPage, type PlaceholderTab } from './pages/PlaceholderPage';
+import { ChatsPage } from './pages/ChatsPage';
+import { MapPage } from './pages/MapPage';
+import { CalendarPage } from './pages/CalendarPage';
 import { VybeProvider, useVybe, type Tab } from './state/store';
 import { EventDetailSheet } from './sheets/EventDetailSheet';
 import { CheckInSheet } from './sheets/CheckInSheet';
@@ -111,15 +113,15 @@ function Shell({ syncHash }: { syncHash: boolean }) {
     return () => window.removeEventListener('hashchange', onHash);
   }, [actions, syncHash]);
 
-  const placeholder = (['chats', 'map', 'calendar'] as Tab[]).includes(state.tab) ? (state.tab as PlaceholderTab) : null;
-
   return (
     <div className="v-root" data-tab={state.tab}>
       <div className="v-stage">
         <HomePage active={state.tab === 'home'} />
         <MemoriesPage active={state.tab === 'memories'} />
         <ProfilePage active={state.tab === 'profile'} />
-        {placeholder && <PlaceholderPage key={placeholder} tab={placeholder} />}
+        <ChatsPage active={state.tab === 'chats'} />
+        <MapPage active={state.tab === 'map'} />
+        <CalendarPage active={state.tab === 'calendar'} />
       </div>
       <GlassBottomNav />
       <Toast />
